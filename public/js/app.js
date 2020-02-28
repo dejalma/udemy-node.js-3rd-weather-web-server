@@ -1,5 +1,3 @@
-console.log('JavaScript load on client side.')
-
 const form = document.querySelector('form');
 const locationTxt = form.querySelector('input');
 const msg1 = document.querySelector('#msg-1');

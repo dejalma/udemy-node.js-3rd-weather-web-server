@@ -11,15 +11,26 @@ const weather_forecast = (latitude, longitude, callback) => {
         } else if (body.error) {
             callback('Unable to finde location!', undefined)
         } else {
-            temperatureNow = body.currently.temperature;
-            precipProbability = body.currently.precipProbability;
-            summaryToday = body.daily.data[0].summary;
+            const currently = body.currently;
+
+            temperature = currently.temperature;
+            apparentTemperature = currently.apparentTemperature;
+            precipProbability = currently.precipProbability;
+
+            const dailyToday = body.daily.data[0];
+
+            temperatureHigh = dailyToday.temperatureHigh;
+            temperatureLow = dailyToday.temperatureLow;
+            summary = dailyToday.summary;
 
             callback(undefined, {
-                text: `${summaryToday} It is currentely ${temperatureNow}ºC. There is a ${precipProbability}% chance of rain.`,
-                temperatureNow,
+                text: `${summary} It is currently ${temperature}ºC, with apparent temperature of ${apparentTemperature}ºC. This high today is ${temperatureHigh}ºC with a low of ${temperatureLow}ºC. There is a ${precipProbability}% chance of rain.`,
+                temperature,
+                apparentTemperature,
+                temperatureHigh,
+                temperatureLow,
                 precipProbability,
-                summaryToday
+                summary
             })
         }
     }) 

@@ -1,10 +1,12 @@
 Mongo DB:
 
-sudo docker run --name mongo -v /mnt/d:/data/d -d mongo 
-sudo docker run -it --rm --link mongo mongo test
-sudo docker exec -it mongo /bin/bash
+//sudo docker run --name mongo -v /mnt/d:/data/d -d mongo 
+sudo docker run -d -p 27017-27019:27017-27019 -v /mnt/d:/data/d --name mongodb mongo
+
+sudo docker run -it --rm --link mongodb mongo test
+sudo docker exec -it mongodb /bin/bash
 
 Mongo Express:
 
 sudo docker logout
-sudo docker run --link mongo -e ME_CONFIG_MONGODB_SERVER=mongo -p 8081:8081 --name=mongo-express -d mongo-express
+sudo docker run --link mongodb -e ME_CONFIG_MONGODB_SERVER=mongodb -p 8081:8081 --name=mongo-express -d mongo-express

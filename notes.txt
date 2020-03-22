@@ -1,0 +1,10 @@
+Mongo DB:
+
+sudo docker run --name mongo -v /mnt/d:/data/d -d mongo 
+sudo docker run -it --rm --link mongo mongo test
+sudo docker exec -it mongo /bin/bash
+
+Mongo Express:
+
+sudo docker logout
+sudo docker run --link mongo -e ME_CONFIG_MONGODB_SERVER=mongo -p 8081:8081 --name=mongo-express -d mongo-express
